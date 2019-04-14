@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 import therapair
 
-db = therapair.therapistsdb
+db = therapair.theradb
 current_therapist = None
 
 class Therapist(db.model):
@@ -10,17 +10,41 @@ class Therapist(db.model):
     name = db.Column(db.String(25), nullable=False)
     gender = db.Column(db.Boolean)
     bio = db.Column(db.Text)
-    qualifications = db.Column(db.PickleType)
-    specialties = db.Column(db.PickleType)
+    qualifications = db.Column(db.Text)
+    specialties = db.Column(db.String(150))
+    profile_picture = db.Column()
+    #specialties is a long ass string with plus signs or commas to split by
+    # TODO: figure out what the hell a relationship is
+    user_reviews = db.relationship('Review', backref = wtf)
+    
 
     def __repr__(self):
         return self.name + " " + self.email_and_phone
     
+
 def add_therapist(email, phone, address, name, gender, bio, qualifications, specialties):
-    therapist = Therapist(email, phone, address, name, gender, bio)
-    #TODO: determine how to turn qualifications and specialties into python lists
+    therapist = Therapist(email, phone, address, name, gender, bio, qualifications, specialties)
     db.session.add(therapist)
     db.session.commit()
 
-def query_therapist(address):
-    current_therapist = db.
+def query_therapist(addy):
+    current_therapist = db.query.filter_by(address=addy).first()
+
+def get_specialties():
+    if current_therapist is not None:
+        list_specialties = current_therapist.specialties.split(",")
+        for specialty in list_specialties:
+            yield specialty
+
+class Review(db.model):
+    user = db.Column(db.String(30), unique = True)
+    therapist = db.Column(db.String(25))
+    anonymity = db.Column(db.Boolean)
+    rating = db.Column(db.Integer, nullable = False)
+    description_of_usage = db.Column(db.String(90))
+    explanation = db.Column(db.Text)
+
+def add_review(user, anonymity, rating, description_of_usage, explanation):
+    review = Review(user, anonymity, rating, description_of_usage, explanation)
+    db.session.add(review)
+    db.session.commit()

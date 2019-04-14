@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///therapists.db'
-therapistsdb = SQLAlchemy(app)
+theradb = SQLAlchemy(app)
+theradb.create_all()
 
 @app.route("/")
 def Home():
