@@ -2,11 +2,19 @@
 	 background-color: #333; 
 } 
 
-.navbar-brand {
+/*.navbar-brand {
   transform: translateX(-50%);
   left: 50%;
   position: absolute;
 }
+*/
+
+.abs-center-x {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+}
+
 .top-buffer {
 	margin-top: 300px;
 }
