@@ -1,14 +1,8 @@
-from flask import Flask, render_template, request
-from flask_bootstrap import Bootstrap
-from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+import therapair
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///therapists.db'
-bootstrap = Bootstrap(app)
-db = SQLAlchemy(app)
+db = therapair.theradb
 current_therapist = None
-#theradb.create_all()
 
 class Therapist(db.Model):
     email_and_phone = db.Column(db.String(45), primary_key = True)
@@ -54,20 +48,3 @@ def add_review(user, anonymity, rating, description_of_usage, explanation):
     review = Review(user, anonymity, rating, description_of_usage, explanation)
     db.session.add(review)
     db.session.commit()
->>>>>>> back-end
-
-@app.route("/")
-def Home():
-    return render_template("home.html")
-
-@app.route("/therapists")
-def Therapists():
-	return render_template("therapists.html")
-
-@app.route("/map")
-def Map():
-	user_zip = request.form.get('zip')
-	return render_template("map.html", zip=user_zip)
-
-if __name__ == '__main__':
-	app.run(debug = True)
