@@ -4,7 +4,7 @@ import therapair
 db = therapair.theradb
 current_therapist = None
 
-class Therapist(db.model):
+class Therapist(db.Model):
     email_and_phone = db.Column(db.String(45), primary_key = True)
     address = db.Column(db.String(30), unique=True, nullable=False)
     name = db.Column(db.String(25), nullable=False)
@@ -22,8 +22,8 @@ class Therapist(db.model):
         return self.name + " " + self.email_and_phone
     
 
-def add_therapist(email, phone, address, name, gender, bio, qualifications, specialties):
-    therapist = Therapist(email, phone, address, name, gender, bio, qualifications, specialties)
+def add_therapist(em, ph, ad, nm, gn, bi, qu, sp):
+    therapist = Therapist(email=em, phone=ph, address=ad, name=nm, gender=gn, bio=bi, qualifications=qu, specialties=sp)
     db.session.add(therapist)
     db.session.commit()
 
@@ -36,7 +36,7 @@ def get_specialties():
         for specialty in list_specialties:
             yield specialty
 
-class Review(db.model):
+class Review(db.Model):
     user = db.Column(db.String(30), unique = True)
     therapist = db.Column(db.String(25))
     anonymity = db.Column(db.Boolean)
