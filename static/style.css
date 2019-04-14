@@ -1,8 +1,12 @@
  body {
-	 background-image: url("JT.jpg");
-	 background-color: #cccccc;
+	 background-color: #333; 
 } 
 
+.navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}
 .top-buffer {
 	margin-top: 300px;
 }
