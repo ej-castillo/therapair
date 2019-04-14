@@ -15,7 +15,7 @@ class Therapist(db.model):
     profile_picture = db.Column()
     #specialties is a long ass string with plus signs or commas to split by
     # TODO: figure out what the hell a relationship is
-    user_reviews = db.relationship('Review', backref = wtf)
+    user_reviews = db.relationship('Review', backref = 'therapist', lazy = True)
     
 
     def __repr__(self):
