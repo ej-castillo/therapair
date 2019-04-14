@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+
+{% block content %}
+<div class="row top top-buffer justify-content-center">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="input-group">
+        <input type="POST" class="form-control input-lg" id="zip" placeholder="Input Your Zip Code">
+          <span class="input-group-btn">
+            <div id="browse_app">
+              <a class="btn btn-primary btn-lg" href="/map">Add</a>
+            </div>
+          </span>
+      </div>
+    </div>
+</div>
+ {% endblock %}

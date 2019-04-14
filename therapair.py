@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
+<<<<<<< HEAD
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+=======
+>>>>>>> 4a5dcec9ccf317d27e07dd58252eccd9205bd43c
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///therapists.db'
@@ -57,17 +60,18 @@ def add_review(user, anonymity, rating, description_of_usage, explanation):
 >>>>>>> back-end
 
 @app.route("/")
-def Home():
-    return render_template("home.html")
+@app.route("/index")
+def index():
+    return render_template("index.html")
 
 @app.route("/therapists")
-def Therapists():
+def therapists():
 	return render_template("therapists.html")
 
 @app.route("/map")
-def Map():
-	user_zip = request.form.get('zip')
+def map():
+	user_zip = request.form.get("zip")
 	return render_template("map.html", zip=user_zip)
 
-if __name__ == '__main__':
-	app.run(debug = True)
+if __name__ == "__main__":
+	app.run(debug=True)
