@@ -2,3 +2,7 @@
 	 background-image: url("JT.jpg");
 	 background-color: #cccccc;
 } 
+
+.top-buffer {
+	margin-top: 300px;
+}
